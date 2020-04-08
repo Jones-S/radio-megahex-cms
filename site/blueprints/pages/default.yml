@@ -9,11 +9,27 @@ columns:
       content:
         type: fields
         fields:
-          text:
-            label: Text
-            type:  textarea
-            buttons: true
-            required: true
+          broadcast:
+            label: Current program
+            type:  text
+
+          paragraphs:
+            label: Paragraphs
+            type: structure
+            columns:
+              title:
+                width: 2/8
+              text:
+                width: 5/8
+              inverted:
+                width: 1/8
+            fields:
+              title:
+                type: text
+              text:
+                type: textarea
+              inverted:
+                type: toggle
 
           metadesc:
             label: Meta Description
