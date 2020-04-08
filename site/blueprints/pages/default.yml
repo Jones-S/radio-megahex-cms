@@ -12,7 +12,7 @@ columns:
           broadcast:
             label: Current program
             type:  text
-          twitch-channel:
+          twitch_channel:
             label: Twitch Channel
             type:  text
 
