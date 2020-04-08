@@ -1,8 +1,35 @@
 title: Default Page
-preset: page
-fields:
-  text:
-    label: Text
-    type: textarea
-    size: large
+
+columns:
+
+  # main content
+  main:
+    width: 1/2
+    sections:
+      content:
+        type: fields
+        fields:
+          text:
+            label: Text
+            type:  textarea
+            buttons: true
+            required: true
+
+          metadesc:
+            label: Meta Description
+            type: text
+            required: true
+            validate:
+              minLength: 30
+              maxLength: 160
+            help: Die Meta Description dient der Suchmaschinenoptimierung und sollte zwischen 135 bis 160 Zeichen lang sein. Mehr Infos dazu unter https://yoast.com/meta-descriptions/
+
+  secondary:
+    width: 1/2
+    sections:
+      files:
+        sortable: true
+        max: 10
+        width: 2000
+        height: 2000
 

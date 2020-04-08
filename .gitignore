@@ -3,10 +3,6 @@
 
 Icon
 .DS_Store
-yarn-error.log
-node_modules
-build
-.sass-cache
 .cache
 
 # Temporary files
@@ -49,11 +45,3 @@ kirby/*
 # ---------------
 vendor/*
 site/plugins*
-
-
-# Files copied from source folder
-# ---------------
-
-public/assets/*
-public/index.html
-public/.htaccess

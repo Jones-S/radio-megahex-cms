@@ -10,13 +10,15 @@
 
 return [
   'debug' => true,
+  'languages' => true, // enable multilang
   'smartypants' => true, // https://getkirby.com/docs/guide/content/text-formatting#smartypants
   'api' => [
     'slug' => 'api',
     'basicAuth' => true,
     'allowInsecure' => true,
     'robinscholz.better-rest.smartypants' => true,
-    'robinscholz.better-rest.srcset' => [333, 777, 888, 1111]
+    'robinscholz.better-rest.srcset' => [333, 777, 888, 1111],
+    // 'robinscholz.better-rest.language' => 'en_US'
 
     // // Here we define custom endpoints
     // 'routes' => [

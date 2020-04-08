@@ -37,6 +37,8 @@ $response = $client->request(
 // Set headers and look for the right referrers
 header('Content-type: application/json');
 header('Access-Control-Allow-Origin: *');
+// header('Accept-Language: en');
+// header('Content-Language: en');
 
 $statusCode = $response->getStatusCode();
 
