@@ -8,7 +8,19 @@ use GuzzleHttp\Client;
 $username = USER['username'];
 $password = USER['password'];
 $path = $_SERVER['REQUEST_URI'];
-$protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : 'http://';
+
+// get the correct protocol
+if (
+  isset($_SERVER['HTTPS']) &&
+  ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+  isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+  $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')
+{
+    $protocol = 'https://';
+}
+else {
+  $protocol = 'http://';
+}
 $host = $_SERVER['HTTP_HOST'];
 $baseUri = $protocol . $host;
 
@@ -21,7 +33,10 @@ $requestUrl = trim($match[1], '/');
 // Create a client with a base URI
 $client = new GuzzleHttp\Client([
 	'base_uri' => $baseUri . '/rest/',
-	'http_errors' => false
+  'http_errors' => false,
+  'headers' => [
+    'Accept' => 'application/json; charset=utf-8'
+  ]
 ]);
 // Send a request with basic authentication
 $response = $client->request(
@@ -37,8 +52,6 @@ $response = $client->request(
 // Set headers and look for the right referrers
 header('Content-type: application/json');
 header('Access-Control-Allow-Origin: *');
-// header('Accept-Language: en');
-// header('Content-Language: en');
 
 $statusCode = $response->getStatusCode();
 
