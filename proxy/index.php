@@ -12,10 +12,6 @@ $protocol = stripos($_SERVER['SERVER_PROTOCOL'], 'https') === 0 ? 'https://' : '
 $host = $_SERVER['HTTP_HOST'];
 $baseUri = $protocol . $host;
 
-// echo $path;
-// echo $host;
-// echo $baseUri;
-
 // Remove /proxy from request
 // https://regex101.com/r/vesbph/1
 preg_match("/\/proxy([a-zA-Z+0-9\/-]+)/", $path, $match);
@@ -24,9 +20,7 @@ $requestUrl = trim($match[1], '/');
 
 // Create a client with a base URI
 $client = new GuzzleHttp\Client([
-	// ⚠️ Change the url depending on if you are on your local computer or on remote
-	'base_uri' => $baseUri . '/api/',
-	// 'base_uri' => 'https://cms.ssar.ch/api/',
+	'base_uri' => $baseUri . '/rest/',
 	'http_errors' => false
 ]);
 // Send a request with basic authentication
