@@ -1,0 +1,59 @@
+# System files
+# ------------
+
+Icon
+.DS_Store
+yarn-error.log
+node_modules
+build
+.sass-cache
+.cache
+
+# Temporary files
+# ---------------
+
+kirby/thumbs/*
+!kirby/thumbs/index.html
+
+kirby/site/cache/*
+!kirby/site/cache/index.html
+
+media/*
+site/sessions/*
+
+# -------------SECURITY-------------
+# NEVER publish these files via Git!
+# -------------SECURITY-------------
+
+# Kirby accounts
+# ---------------
+
+site/accounts/*
+
+# Avatars
+# ---------------
+
+kirby/assets/avatars/*
+!kirby/assets/avatars/index.html
+
+
+# Content (Single Source of Truth online)
+# ---------------
+content/*
+
+# Kirby CMS + Panel
+# ---------------
+kirby/*
+
+# Kirby CMS + Panel
+# ---------------
+vendor/*
+site/plugins*
+
+
+# Files copied from source folder
+# ---------------
+
+public/assets/*
+public/index.html
+public/.htaccess
