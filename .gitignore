@@ -4,6 +4,7 @@
 Icon
 .DS_Store
 .cache
+.htaccess
 
 # Temporary files
 # ---------------
