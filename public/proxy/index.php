@@ -1,6 +1,6 @@
 <?php
 
-require dirname(__DIR__, 1) . '/vendor/autoload.php';
+require dirname(__DIR__, 2) . '/vendor/autoload.php';
 require __DIR__ . '/auth.php';
 
 use GuzzleHttp\Client;
@@ -8,6 +8,9 @@ use GuzzleHttp\Client;
 $username = USER['username'];
 $password = USER['password'];
 $path = $_SERVER['REQUEST_URI'];
+
+// find origin host
+$origin = parse_url($_SERVER['HTTP_REFERER'])['host']; // e.g. referrer = http://localhost:8080 > $origin will be 'localhost'
 
 // get the correct protocol
 if (
@@ -50,8 +53,10 @@ $response = $client->request(
 // https://github.com/guzzle/guzzle/issues/1848
 
 // Set headers and look for the right referrers
-header('Content-type: application/json');
-header('Access-Control-Allow-Origin: *');
+if (in_array($origin, LIST_OF_ALLOWED_ORIGINS)) {
+  header('Content-type: application/json');
+  header('Access-Control-Allow-Origin:' . $_SERVER['HTTP_ORIGIN']);
+}
 
 $statusCode = $response->getStatusCode();
 

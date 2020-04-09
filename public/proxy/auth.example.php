@@ -5,13 +5,14 @@
 // and add the credentials to the online auth.php file!
 const USER = [
   'username' => 'js+megahex-api@wearelucid.ch',
-  'password' => 'hubbub.hotshot.skull.armoire.backfill'
+  'password' => 'your-password'
 
 ];
 
 // Send back correct request headers to not allow returns to anywhere
-// const LIST_OF_ALLOWED_ORIGINS = [
-// 	'localhost',
-// 	'cms.sar.test',
-// 	'ssar.ch'
-// ];
+const LIST_OF_ALLOWED_ORIGINS = [
+	'localhost',
+	'cms.megahex.test',
+	'cms.megahex.fm',
+	'megahex.fm'
+];

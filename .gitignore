@@ -9,14 +9,7 @@ Icon
 # Temporary files
 # ---------------
 
-kirby/thumbs/*
-!kirby/thumbs/index.html
-
-kirby/site/cache/*
-!kirby/site/cache/index.html
-
-media/*
-site/sessions/*
+storage/cache/*
 
 # -------------SECURITY-------------
 # NEVER publish these files via Git!
@@ -25,18 +18,15 @@ site/sessions/*
 # Kirby accounts
 # ---------------
 
-site/accounts/*
-
-# Avatars
-# ---------------
-
-kirby/assets/avatars/*
-!kirby/assets/avatars/index.html
-
+storage/accounts/*
+public/proxy/auth.php
 
 # Content (Single Source of Truth online)
 # ---------------
-content/*
+storage/content/*
+storage/media/*
+public/media
+storage/sessions/*
 
 # Kirby CMS + Panel
 # ---------------
