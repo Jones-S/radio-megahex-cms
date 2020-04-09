@@ -18,6 +18,7 @@ return [
     'allowInsecure' => true
   ],
   'robinscholz.better-rest.smartypants' => true,
+  'robinscholz.better-rest.kirbytags' => true,
   'robinscholz.better-rest.srcset' => [333, 777, 888, 1111],
   // 'robinscholz.better-rest.language' => 'en'
 ];

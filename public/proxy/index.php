@@ -10,7 +10,9 @@ $password = USER['password'];
 $path = $_SERVER['REQUEST_URI'];
 
 // find origin host
-$origin = parse_url($_SERVER['HTTP_REFERER'])['host']; // e.g. referrer = http://localhost:8080 > $origin will be 'localhost'
+if (isset($_SERVER['HTTP_REFERER'])) {
+  $origin = parse_url($_SERVER['HTTP_REFERER'])['host']; // e.g. referrer = http://localhost:8080 > $origin will be 'localhost'
+}
 
 // get the correct protocol
 if (
@@ -52,9 +54,10 @@ $response = $client->request(
 );
 // https://github.com/guzzle/guzzle/issues/1848
 
+header('Content-type: application/json');
+
 // Set headers and look for the right referrers
-if (in_array($origin, LIST_OF_ALLOWED_ORIGINS)) {
-  header('Content-type: application/json');
+if (isset($origin) && in_array($origin, LIST_OF_ALLOWED_ORIGINS)) {
   header('Access-Control-Allow-Origin:' . $_SERVER['HTTP_ORIGIN']);
 }
 

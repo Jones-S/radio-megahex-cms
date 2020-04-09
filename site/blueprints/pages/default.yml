@@ -45,10 +45,12 @@ columns:
 
   secondary:
     width: 1/2
-    sections:
-      files:
+    fields:
+      draggable_images:
+        label: Draggable Images !
+        type: files
+        template: default
         sortable: true
         max: 10
         width: 2000
         height: 2000
-

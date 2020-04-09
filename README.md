@@ -1,3 +1,18 @@
+# Setup
+- `$ composer install`
+- setup local host pointing to `/public`
+- add `/public/proxy/auth.php` by copying `/public/proxy/auth.example.php`
+
+
+
+
+
+
+
+
+
+
+
 # Kirby Plainkit
 
 Kirby is a file-based CMS.

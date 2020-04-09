@@ -1,0 +1,24 @@
+title: Default Image
+
+accept:
+  mime: image/jpeg, image/jpg, image/png, image/gif,
+  minwidth: 1000
+  # in bytes
+  maxsize: 3000000
+
+fields:
+  alt:
+    label: Alt Text
+    type: text
+    required: true
+  alt_info:
+    label: Alt Info
+    type: info
+    text: The alt tag is necessary for each image. Blind people e.g. will hear this text instead of seeing the image.
+  caption:
+    label: Caption
+    type: text
+  caption_info:
+    label: Caption Info
+    type: info
+    text: The caption should be used for indicating copyright information or other meta information about the image. This text will be shown on page.
