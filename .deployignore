@@ -1,0 +1,5 @@
+# Exclude files from being copied to the release
+.gitignore
+.editorconfig
+README.md
+.htaccess.example

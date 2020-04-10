@@ -21,4 +21,7 @@ return [
   'robinscholz.better-rest.kirbytags' => true,
   'robinscholz.better-rest.srcset' => [333, 777, 888, 1111],
   // 'robinscholz.better-rest.language' => 'en'
+  'panel' =>[
+    'install' => true
+  ]
 ];
