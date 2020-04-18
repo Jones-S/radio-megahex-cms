@@ -56,10 +56,12 @@ $response = $client->request(
 
 header('Content-type: application/json');
 
+// TODO: Fix reading out of allowed origins
 // Set headers and look for the right referrers
-if (isset($origin) && in_array($origin, LIST_OF_ALLOWED_ORIGINS)) {
-  header('Access-Control-Allow-Origin:' . $_SERVER['HTTP_ORIGIN']);
-}
+// if (isset($origin) && in_array($origin, LIST_OF_ALLOWED_ORIGINS)) {
+  // header('Access-Control-Allow-Origin:' . $_SERVER['HTTP_ORIGIN']);
+// }
+header('Access-Control-Allow-Origin: *');
 
 $statusCode = $response->getStatusCode();
 

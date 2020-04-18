@@ -20,6 +20,8 @@ columns:
               ⚠️: If a page has no corresponding filename in https://zzz.megahex.fm/recordings/, it will **not appear** in the archive!
               Vice versa, it is the same. A file on https://zzz.megahex.fm/recordings/ without an entry page does not appear in the archive.
 
+              Also for now, one has to enter de date manually, although that information is saved within the recordings endpoint. Sorry for that. 🤷‍♂️
+
           filename:
             type: text
 
@@ -29,6 +31,9 @@ columns:
           end_time:
             type: time
             width: 1/2
+          date:
+            type: date
+            format: Y-m-d
 
           paragraphs:
               label: Paragraphs
