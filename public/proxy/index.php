@@ -37,7 +37,7 @@ $requestUrl = trim($match[1], '/');
 
 // Create a client with a base URI
 $client = new GuzzleHttp\Client([
-	'base_uri' => $baseUri . '/rest/',
+	'base_uri' => $baseUri . '/',
   'http_errors' => false,
   'headers' => [
     'Accept' => 'application/json; charset=utf-8'

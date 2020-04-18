@@ -1,0 +1,70 @@
+title: Archive Entry
+
+columns:
+
+  # main content
+  main:
+    width: 1/2
+    sections:
+      content:
+        type: fields
+        fields:
+          info:
+            label: Info
+            type: info
+            text: |
+              To add more infos about one specific broadcast, creating a relation is mandatory. Add the unique filename from https://zzz.megahex.fm/recordings/ into the field «Filename». This creates the link between the data in here and the actual archived file.
+              Then add texts, infos and other metadata.
+              (The date is automatically filled in from https://zzz.megahex.fm/recordings/ and used for sorting).
+
+              ⚠️: If a page has no corresponding filename in https://zzz.megahex.fm/recordings/, it will **not appear** in the archive!
+              Vice versa, it is the same. A file on https://zzz.megahex.fm/recordings/ without an entry page does not appear in the archive.
+
+          filename:
+            type: text
+
+          start_time:
+            type: time
+            width: 1/2
+          end_time:
+            type: time
+            width: 1/2
+
+          paragraphs:
+              label: Paragraphs
+              type: structure
+              columns:
+                title:
+                  width: 2/8
+                text:
+                  width: 5/8
+                inverted:
+                  width: 1/8
+              fields:
+                title:
+                  type: text
+                text:
+                  type: textarea
+                inverted:
+                  type: toggle
+
+            metadesc:
+              label: Meta Description
+              type: text
+              required: true
+              validate:
+                minLength: 30
+                maxLength: 160
+              help: Die Meta Description dient der Suchmaschinenoptimierung und sollte zwischen 135 bis 160 Zeichen lang sein. Mehr Infos dazu unter https://yoast.com/meta-descriptions/
+
+  secondary:
+    width: 1/2
+    fields:
+      draggable_images:
+        label: Draggable Images
+        type: files
+        template: default
+        sortable: true
+        max: 10
+        width: 2000
+        height: 2000

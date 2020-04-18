@@ -2,7 +2,7 @@ title: Default Image
 
 accept:
   mime: image/jpeg, image/jpg, image/png, image/gif,
-  minwidth: 1000
+  minwidth: 800
   # in bytes
   maxsize: 3000000
 

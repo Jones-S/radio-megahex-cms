@@ -1,0 +1,75 @@
+title: Archive
+
+columns:
+
+  # main content
+  main:
+    width: 1/2
+    sections:
+      content:
+        type: fields
+        fields:
+          info:
+            label: Info
+            type: info
+            text: |
+              To associate archive entries information with an actual archived file, copy the exact file name of the broadcast into «Name». Find the filename at https://zzz.megahex.fm/recordings/.
+              Example: *megahexlive_2020-04-09_Thursday_1600.mp3* (incl. file extension).
+
+              The date is determined automatically because this info is on https://zzz.megahex.fm/recordings/. Because the exact time is missing, it's required as well.
+
+              Sorting is not necessary, it's automatically ordered by the date provided. Due to maintainability it is advised to keep some sort of order anyway.
+
+          paragraphs:
+              label: Paragraphs
+              type: structure
+              columns:
+                title:
+                  width: 2/8
+                text:
+                  width: 5/8
+                inverted:
+                  width: 1/8
+              fields:
+                title:
+                  type: text
+                text:
+                  type: textarea
+                inverted:
+                  type: toggle
+
+            metadesc:
+              label: Meta Description
+              type: text
+              required: true
+              validate:
+                minLength: 30
+                maxLength: 160
+              help: Die Meta Description dient der Suchmaschinenoptimierung und sollte zwischen 135 bis 160 Zeichen lang sein. Mehr Infos dazu unter https://yoast.com/meta-descriptions/
+
+  secondary:
+    width: 1/2
+    sections:
+      archive_entry_pages_drafts:
+        headline: Drafted Archive Entries
+        type: pages
+        status: draft
+        templates: archiveentry
+
+      archive_entry_pages:
+        headline: Published Archive Entries
+        type: pages
+        status: listed
+        templates: archiveentry
+
+      draggable_images:
+        headline: Draggable Images
+        type: files
+        template: default
+        sortable: true
+        max: 10
+        width: 2000
+        height: 2000
+
+
+

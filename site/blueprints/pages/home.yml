@@ -1,10 +1,5 @@
 title: Default Page
 
-options:
-  changeTemplate:
-    - archive
-    - default
-
 columns:
 
   # main content
@@ -14,6 +9,13 @@ columns:
       content:
         type: fields
         fields:
+          broadcast:
+            label: Current program
+            type:  text
+          twitch_channel:
+            label: Twitch Channel
+            type:  text
+
           paragraphs:
             label: Paragraphs
             type: structure
