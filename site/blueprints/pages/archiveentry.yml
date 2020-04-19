@@ -24,16 +24,14 @@ columns:
 
           filename:
             type: text
-
-          start_time:
-            type: time
-            width: 1/2
-          end_time:
-            type: time
-            width: 1/2
           date:
+            label: Date and start time of show
             type: date
-            format: Y-m-d
+            time: true
+          end_time:
+            label: End time
+            type: time
+            width: 1/2
 
           paragraphs:
               label: Paragraphs
