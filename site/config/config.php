@@ -66,7 +66,7 @@ return [
             'uri' => $child->uri(),
             'slug' => $child->slug(),
             'file' => $child->filename()->toString(),
-            'start_time' => $child->content()->start_time()->toString(),
+            'date' => $child->content()->date()->toString(),
             'end_time' => $child->content()->end_time()->toString()
           ];
         }
