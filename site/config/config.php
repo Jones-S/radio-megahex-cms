@@ -72,7 +72,7 @@ return [
             $content = $child->content();
             $index = $child->indexOf();
             $images = [];
-            $date = $child->content()->date()->toDate('Y-m-d\TH:i:s'); // ISO format like: "2020-04-18T20:30:00Z", should be parseable by all browsers
+            $date = $child->content()->date()->toDate('Y-m-d\TH:i:s\Z'); // ISO format like: "2020-04-18T20:30:00Z", should be parseable by all browsers
 
             $entries[] = [
               'title' => $title,
