@@ -81,7 +81,7 @@ return [
               'uri' => $child->uri(),
               'slug' => $child->slug(),
               'file' => $child->filename()->toString(),
-              'date' => $child->content()->date()->toString(),
+              'date' => $child->content()->date()->toDate('Y-m-d\TH:i:s\Z'), // ISO format like: "2020-04-18T20:30:00Z", should be parseable by all browsers
               'end_time' => $child->content()->end_time()->toString()
             ];
           }
