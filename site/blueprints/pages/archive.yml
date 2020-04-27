@@ -37,15 +37,14 @@ columns:
                   type: textarea
                 inverted:
                   type: toggle
-
-            metadesc:
-              label: Meta Description
-              type: text
-              required: true
-              validate:
-                minLength: 30
-                maxLength: 160
-              help: Die Meta Description dient der Suchmaschinenoptimierung und sollte zwischen 135 bis 160 Zeichen lang sein. Mehr Infos dazu unter https://yoast.com/meta-descriptions/
+          metadesc:
+            label: Meta Description
+            type: text
+            required: true
+            validate:
+              minLength: 30
+              maxLength: 160
+            help: Die Meta Description dient der Suchmaschinenoptimierung und sollte zwischen 135 bis 160 Zeichen lang sein. Mehr Infos dazu unter https://yoast.com/meta-descriptions/
 
   secondary:
     width: 1/2
