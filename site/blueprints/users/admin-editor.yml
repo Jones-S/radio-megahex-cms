@@ -24,12 +24,12 @@ permissions:
     update: true
   user:
     changeName: true
-    changeEmail: false
+    changeEmail: true
     changeLanguage: true
-    changePassword: false
+    changePassword: true
     changeRole: false
     delete: false
-    update: false
+    update: true
   users:
     create: true
     changeEmail: false
