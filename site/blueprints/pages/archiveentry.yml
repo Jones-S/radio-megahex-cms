@@ -35,6 +35,10 @@ columns:
             label: End time
             type: time
             width: 1/2
+          tags:
+            label: Tags
+            type: tags
+            width: 1/2
 
           paragraphs:
               label: Paragraphs
