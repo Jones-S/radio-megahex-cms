@@ -13,17 +13,20 @@ columns:
             label: Info
             type: info
             text: |
-              To add more infos about one specific broadcast, creating a relation is mandatory. Add the unique filename from https://zzz.megahex.fm/recordings/ into the field «Filename». This creates the link between the data in here and the actual archived file.
+              To add more infos about one specific broadcast, creating a relation is mandatory. Navigate to:
+              https://www.negahex.fm/files to see all your uploads and all your recordings.
+
+              Now either add the unique filename from a recording into the field «Filename» – This creates the link between the data in here and the actual archived file.
+              Or copy the full path from an FTP-Upload and paste this into the «Filename» field.
+
               Then add texts, infos and other metadata.
               (The date is automatically filled in from https://zzz.megahex.fm/recordings/ and used for sorting).
-
-              ⚠️: If a page has no corresponding filename in https://zzz.megahex.fm/recordings/, it will **not appear** in the archive!
-              Vice versa, it is the same. A file on https://zzz.megahex.fm/recordings/ without an entry page does not appear in the archive.
 
               Also for now, one has to enter de date manually, although that information is saved within the recordings endpoint. Sorry for that. 🤷‍♂️
 
           filename:
             type: text
+            label: Filename (recordings) or File path (uploads)
           date:
             label: Date and start time of show
             type: date
