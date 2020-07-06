@@ -39,6 +39,13 @@ columns:
             label: Tags
             type: tags
             width: 1/2
+            options:
+              - Megahex Morgenshow
+              - Music
+              - Corona Total
+              - Antira Wochenschau
+              - Bunkr Extracts
+              - Misc
 
           paragraphs:
               label: Paragraphs
