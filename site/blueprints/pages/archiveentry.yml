@@ -42,16 +42,18 @@ columns:
             options:
               - Music
               - Corona Total
-          category:
+          format:
             label: Format/Channel
             type: select
             options:
-              antira: Antira
+              ajourmagazin: Ajour Magazin
+              antipolizei: Anti Polizei News
+              antira: Antira Wochenschau
               bunkr: Bunkr Extracts
+              burnoutdream: Burn Out Dream
               gecko: Channel Gecko
               czarnagora: Czarnagora
               morningshow: Megahex Morgenshow
-              gefaehrderinnen: Gefӕhrderinnen$
               misc: Misc
 
           paragraphs:

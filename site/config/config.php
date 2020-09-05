@@ -1,5 +1,12 @@
 <?php
 
+// helper functions
+if (!function_exists('removeEmpty')) {
+  function removeEmpty($var) {
+    return($var->value !== null && $var->value !== '');
+  }
+}
+
 /**
  * The config file is optional. It accepts a return array with config options
  * Note: Never include more than one return statement, all options go within this single return array
@@ -88,6 +95,40 @@ return [
 
           return [
             'archive_entries' => $entries
+          ];
+        }
+      ],
+      [
+        // Custom route to get all necessary archive info, which is directly saved within the entry page
+        'pattern' => 'filter',
+        'method' => 'GET',
+        'action'  => function ($path = null) {
+          $kirby = new Kirby([
+            'roots' => [
+                'index'    => (dirname(__DIR__)),
+                'base'     => $base    = dirname(__DIR__, 2),
+                'site'     => $base . '/site',
+                'storage'  => $storage = $base . '/storage',
+                'content'  => $storage . '/content',
+                'accounts' => $storage . '/accounts',
+                'cache'    => $storage . '/cache',
+                'media'    => $storage . '/media', // NOTE: needs symlink /public/media to /storage/media
+                'sessions' => $storage . '/sessions',
+            ]
+          ]);
+          $pages = $kirby->page('archive')->children();
+          $unique = true;
+          // getting all values of select field «format», and removing duplicate values.
+          $formats = $pages->pluck('format', null, $unique);
+          // delete values which are null
+          $filtered_formats = array_filter($formats, 'removeEmpty');
+
+          $tags = $pages->pluck('tags', null, $unique);
+          $filtered_tags = array_filter($tags, 'removeEmpty');
+
+          return [
+            'formats' => $filtered_formats,
+            'tags' => $filtered_tags
           ];
         }
       ],
