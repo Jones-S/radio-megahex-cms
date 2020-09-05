@@ -89,7 +89,9 @@ return [
               'slug' => $child->slug(),
               'file' => $child->filename()->toString(),
               'date' => $date,
-              'end_time' => $child->content()->end_time()->toString()
+              'end_time' => $child->content()->end_time()->toString(),
+              'format' => $child->content()->format()->toString(),
+              'tags' => $child->content()->tags()->split(',')
             ];
           }
 
@@ -119,16 +121,12 @@ return [
           $pages = $kirby->page('archive')->children();
           $unique = true;
           // getting all values of select field «format», and removing duplicate values.
-          $formats = $pages->pluck('format', null, $unique);
-          // delete values which are null
-          $filtered_formats = array_filter($formats, 'removeEmpty');
-
-          $tags = $pages->pluck('tags', null, $unique);
-          $filtered_tags = array_filter($tags, 'removeEmpty');
+          $formats = $pages->pluck('format', ',', $unique);
+          $tags = $pages->pluck('tags', ',', $unique);
 
           return [
-            'formats' => $filtered_formats,
-            'tags' => $filtered_tags
+            'formats' => $formats,
+            'tags' => $tags
           ];
         }
       ],
