@@ -40,12 +40,19 @@ columns:
             type: tags
             width: 1/2
             options:
-              - Megahex Morgenshow
               - Music
               - Corona Total
-              - Antira Wochenschau
-              - Bunkr Extracts
-              - Misc
+          category:
+            label: Format/Channel
+            type: select
+            options:
+              antira: Antira
+              bunkr: Bunkr Extracts
+              gecko: Channel Gecko
+              czarnagora: Czarnagora
+              morningshow: Megahex Morgenshow
+              gefaehrderinnen: Gefӕhrderinnen$
+              misc: Misc
 
           paragraphs:
               label: Paragraphs
