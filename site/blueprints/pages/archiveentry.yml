@@ -40,8 +40,16 @@ columns:
             type: tags
             width: 1/2
             options:
-              - Music
-              - Corona Total
+              - Info
+              - Sound
+              - Talk
+              - Spezial
+              - Poetry
+              - Experimental
+              - Produktion
+              - Livesendung
+              - DJ Set/Mix
+              - Extern
           format:
             label: Format/Channel
             type: select
