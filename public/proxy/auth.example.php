@@ -10,7 +10,7 @@ const USER = [
 ];
 
 // Send back correct request headers to not allow returns to anywhere
-const LIST_OF_ALLOWED_ORIGINS = [
+const ALLOWED_ORIGINS = [
 	'localhost',
 	'cms.megahex.test',
 	'cms.megahex.fm',

@@ -39,12 +39,13 @@ $requestUrl = trim($match[1], '/');
 $client = new GuzzleHttp\Client([
 	'base_uri' => $baseUri . '/',
   'http_errors' => false,
+  'timeout' => 10,
   'headers' => [
     'Accept' => 'application/json; charset=utf-8'
   ]
 ]);
 // Send a request with basic authentication
-$response = $client->request(
+$promise = $client->requestAsync(
 	'GET',
 	$requestUrl,
 	[
@@ -52,26 +53,38 @@ $response = $client->request(
 		'Origin' => $baseUri
 	]
 );
-// https://github.com/guzzle/guzzle/issues/1848
 
+$promise->then(
+  function($response) {
+    $statusCode = $response->getStatusCode();
+
+    if (200 === $statusCode) {
+      echo $response->getBody();
+    }
+    else {
+      echo json_encode([
+        'error' => true,
+        'status' => $statusCode
+      ]);
+    }
+  },
+  function($exeption) {
+    echo json_encode([
+      'error' => true,
+      'expection' => $exeption->getMessage()
+    ]);
+  }
+);
+
+// https://github.com/guzzle/guzzle/issues/1848
 header('Content-type: application/json');
 
-// TODO: Fix reading out of allowed origins
-// Set headers and look for the right referrers
-// if (isset($origin) && in_array($origin, LIST_OF_ALLOWED_ORIGINS)) {
-  // header('Access-Control-Allow-Origin:' . $_SERVER['HTTP_ORIGIN']);
-// }
-header('Access-Control-Allow-Origin: *');
-
-$statusCode = $response->getStatusCode();
-
-if (200 === $statusCode) {
-	echo $response->getBody();
+// Allow CORS only for a limited amount of domains
+if (in_array($host, ALLOWED_ORIGINS, true)) {
+  header('Access-Control-Allow-Origin: *');
 }
-else {
-  echo json_encode([
-		'error' => true,
-		'status' => $statusCode
-	]);
-}
+
+$promise->wait();
+
+
 
