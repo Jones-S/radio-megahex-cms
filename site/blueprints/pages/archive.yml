@@ -4,7 +4,7 @@ columns:
 
   # main content
   main:
-    width: 1/2
+    width: 1/1
     sections:
       content:
         type: fields
@@ -47,19 +47,45 @@ columns:
             help: Die Meta Description dient der Suchmaschinenoptimierung und sollte zwischen 135 bis 160 Zeichen lang sein. Mehr Infos dazu unter https://yoast.com/meta-descriptions/
 
   secondary:
-    width: 1/2
+    width: 1/1
     sections:
       archive_entry_pages_drafts:
         headline: Drafted Archive Entries
-        type: pages
+        type: pagetable
         status: draft
         templates: archiveentry
 
       archive_entry_pages:
         headline: Published Archive Entries
-        type: pages
+        type: pagetable
         status: listed
         templates: archiveentry
+        columns:
+          title:
+            label: Page title
+            text: '{{ page.title }}'
+            type: text
+            width: 1/2
+            sortable: true
+            searchable: true
+          format:
+            label: Format/Channel
+            text: '{{ page.format }}'
+            type: text
+            sortable: true
+            searchable: true
+          date:
+            label: Date
+            text: '{{ page.date }}'
+            type: text
+            sortable: true
+            searchable: false
+          tag:
+            label: Tag
+            text: '{{ page.tags }}'
+            type: tags
+            sortable: true
+            searchable: true
 
       draggable_images:
         headline: Draggable Images

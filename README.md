@@ -1,6 +1,19 @@
 # Setup
 - `$ composer install`
 - setup local host pointing to `/public`
+- [Locally]: create a symlink to `/storage/media` within `/public`. On the remote this folder is symlinked to a shared folder!
+To do so use this command `$ ln -s /path/to/original /path/to/link` -> if you are in the root folder of the project use: 
+`$ ln -s /Users/USER/PATH/radio-megahex-cms/storage/media ./public/media ./public/media`. Using a relative path does not work... 🤷‍♂️
+- [Locally]: Rename `.htaccess.example` to `.htaccess` and move it into `/public`.
+
+Now when visiting `cms.megahex.test/panel` you are prompted with a call to install kirby. You can either do that or copy some files from an existing installation
+  - `/media/pages`
+  - `/storage/accounts` (when copying from remote this is found in `/shared/storage/accounts`. Copy this to `/storage/accounts`)
+  - `/storage/content` (when copying from remote this is found in `/shared/storage/content`. Copy this to `/storage/content`)
+
+- Visit the panel. All content should be there
+
+## API
 - add `/public/proxy/auth.php` by copying `/public/proxy/auth.example.php`
 
 
