@@ -152,6 +152,115 @@ return [
         }
       ],
       [
+        // Overriding robinscholz/better-rest route for home (.../rest/pages/home)
+        'pattern' => 'megahex-home',
+        'method' => 'GET',
+        'action'  => function ($path = null) {
+          $kirby = new Kirby([
+            'roots' => [
+                'index'    => (dirname(__DIR__)),
+                'base'     => $base    = dirname(__DIR__, 2),
+                'site'     => $base . '/site',
+                'storage'  => $storage = $base . '/storage',
+                'content'  => $storage . '/content',
+                'accounts' => $storage . '/accounts',
+                'cache'    => $storage . '/cache',
+                'media'    => $storage . '/media', // NOTE: needs symlink /public/media to /storage/media
+                'sessions' => $storage . '/sessions',
+            ]
+          ]);
+          $home = $kirby->page('home');
+          $content = $home->content();
+          $broadcast = $content->broadcast()->toString();
+          $twitch = $content->twitch_channel()->toString();
+          $relatedPages = $content->related()->toPages();
+          $relatedPagesExtended = [];
+
+          foreach($relatedPages as $relatedPage) {
+            $content = $relatedPage->content();
+            // $files = $content->draggable_images()->files();
+            $images = $relatedPage->images();
+            $teaserImages = [];
+            $teaserImage = 'nope';
+
+            if (!empty($images)) {
+              $teaserImage  = $relatedPage->image();
+            }
+
+            foreach ($images as $file) {
+              $teaserImages[] = [
+                'filename' => $file->filename(),
+                'index' => $file->indexOf(),
+                'sizes' => [
+                  'original' => $file->url(),
+                  'alt' => $file->content()->alt()->toString(),
+                  'thumb' => $file->crop(400, 226, 80)->url(),
+                  'small' => $file->resize(720, null, 60)->url(),
+                  'medium' => $file->resize(1440, null, 60)->url(),
+                  'large' => $file->resize(2000, null, 60)->url(), // if the original image is smaller than size, it will just return the biggest possible 👌🏼
+                  'ogimage' => $file->crop(1200, 630, 70)->url(),
+                ]
+              ];
+            }
+
+            $relatedPagesExtended[] = [
+              'title' => $relatedPage->title()->toString(),
+              'slug' => $relatedPage->uri(),
+              'uri' => $relatedPage->uri(),
+              'index' => $relatedPage->indexOf(),
+              'slug' => $relatedPage->slug(),
+              'filename' => $content->filename()->toString(),
+              'date' => $content->date()->toDate('Y-m-d\TH:i:s\Z'), // ISO format like: "2020-04-18T20:30:00Z", should be parseable by all browsers
+              'teaserImage' => $teaserImage,
+              'teaserImages' => $teaserImages
+              // 'file' => $relatePage->filename()->toString(),
+              // 'date' => $date,
+              // 'end_time' => $relatePage->content()->end_time()->toString(),
+              // 'format' => $relatePage->content()->format()->toString(),
+              // 'tags' => $relatePage->content()->tags()->split(',')
+            ];
+          }
+          // $entries = [];
+
+          // foreach ($children as $child) {
+          //   if ($child->status() !== 'listed') {
+          //     continue;
+          //   }
+
+          //   $title = $child->title()->toString();
+          //   $uri = $child->uri();
+          //   $content = $child->content();
+          //   $index = $child->indexOf();
+          //   $images = [];
+          //   $date = $child->content()->date()->toDate('Y-m-d\TH:i:s\Z'); // ISO format like: "2020-04-18T20:30:00Z", should be parseable by all browsers
+
+          //   $entries[] = [
+          //     'title' => $title,
+          //     'slug' => $uri,
+          //     'index' => $index,
+          //     'uri' => $child->uri(),
+          //     'slug' => $child->slug(),
+          //     'file' => $child->filename()->toString(),
+          //     'date' => $date,
+          //     'end_time' => $child->content()->end_time()->toString(),
+          //     'format' => $child->content()->format()->toString(),
+          //     'tags' => $child->content()->tags()->split(',')
+          //   ];
+          // }
+
+          return [
+            'code' => '200',
+            'data' => [
+              'content' => [
+                'broadcast' => $broadcast,
+                'twitch_channel' => $twitch,
+                'related' => $relatedPagesExtended
+              ]
+            ]
+          ];
+        }
+      ],
+      [
         // Custom route to get all necessary archive info, which is directly saved within the entry page
         'pattern' => 'filter',
         'method' => 'GET',
