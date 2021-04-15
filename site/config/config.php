@@ -48,6 +48,57 @@ return [
     // ]);
 
     return [
+      // TODO: register plugin to provide custom endpoints:
+      // https://getkirby.com/docs/reference/plugins/extensions/api
+      [
+        // Custom route to get all blog entries
+        'pattern' => 'blog',
+        'method' => 'GET',
+        'action'  => function ($path = null) {
+          $kirby = new Kirby([
+            'roots' => [
+                'index'    => (dirname(__DIR__)),
+                'base'     => $base    = dirname(__DIR__, 2),
+                'site'     => $base . '/site',
+                'storage'  => $storage = $base . '/storage',
+                'content'  => $storage . '/content',
+                'accounts' => $storage . '/accounts',
+                'cache'    => $storage . '/cache',
+                'media'    => $storage . '/media', // NOTE: needs symlink /public/media to /storage/media
+                'sessions' => $storage . '/sessions',
+            ]
+          ]);
+          $children = $kirby->page('blog')->children();
+          $entries = [];
+
+          foreach ($children as $child) {
+            if ($child->status() !== 'listed') {
+              continue;
+            }
+
+            $title = $child->title()->toString();
+            $uri = $child->uri();
+            $content = $child->content();
+            $index = $child->indexOf();
+            $images = [];
+            $date = $child->content()->date()->toDate('Y-m-d\TH:i:s\Z'); // ISO format like: "2020-04-18T20:30:00Z", should be parseable by all browsers
+
+            $entries[] = [
+              'title' => $title,
+              'slug' => $uri,
+              'index' => $index,
+              'uri' => $child->uri(),
+              'slug' => $child->slug(),
+              'file' => $child->filename()->toString(),
+              'date' => $date,
+            ];
+          }
+
+          return [
+            'blog_entries' => $entries
+          ];
+        }
+      ],
       [
         // Custom route to get all necessary archive info, which is directly saved within the entry page
         'pattern' => 'archive',
