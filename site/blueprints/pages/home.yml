@@ -16,6 +16,13 @@ columns:
             label: Twitch Channel
             type:  text
 
+          related:
+            label: Curated Blogposts and Archiveentries
+            type: pages
+            subpages: true
+            query: site.find(['blog', 'archive'])
+            # query: page.index.filterBy('template', 'in', ['blogentry', 'archiveentry'])
+
           paragraphs:
             label: Paragraphs
             type: structure
@@ -42,6 +49,25 @@ columns:
               minLength: 30
               maxLength: 160
             help: Die Meta Description dient der Suchmaschinenoptimierung und sollte zwischen 135 bis 160 Zeichen lang sein. Mehr Infos dazu unter https://yoast.com/meta-descriptions/
+
+      # curated_posts_and_podcasts:
+      #   headline: Selected Blog Entries
+      #   type: pagetable
+      #   templates: blogentry, archiveentry
+      #   columns:
+      #     title:
+      #       label: Page title
+      #       text: '{{ page.title }}'
+      #       type: text
+      #       width: 2/3
+      #       sortable: true
+      #       searchable: true
+      #     date:
+      #       label: Date
+      #       text: '{{ page.date }}'
+      #       type: text
+      #       sortable: true
+      #       searchable: false
 
   secondary:
     width: 1/2

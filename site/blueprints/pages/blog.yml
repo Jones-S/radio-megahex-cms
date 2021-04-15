@@ -1,0 +1,55 @@
+title: Blog
+
+columns:
+
+  # main content
+  main:
+    width: 1/1
+    sections:
+      content:
+        type: fields
+        fields:
+          info:
+            label: Info
+            type: info
+            text: |
+              This page shows automatically all blog entries. Only add a meta description for SEO!
+          metadesc:
+            label: Meta Description
+            type: text
+            required: true
+            validate:
+              minLength: 30
+              maxLength: 160
+            help: Die Meta Description dient der Suchmaschinenoptimierung und sollte zwischen 135 bis 160 Zeichen lang sein. Mehr Infos dazu unter https://yoast.com/meta-descriptions/
+
+      blog_entry_pages_drafts:
+        headline: Drafted Blog Entries
+        type: pagetable
+        status: draft
+        templates: blogentry
+
+      blog_entry_pages:
+        headline: Published Blog Entries
+        type: pagetable
+        status: listed
+        templates: blogentry
+        columns:
+          title:
+            label: Page title
+            text: '{{ page.title }}'
+            type: text
+            width: 2/3
+            sortable: true
+            searchable: true
+          date:
+            label: Date
+            text: '{{ page.date }}'
+            type: text
+            sortable: true
+            searchable: false
+
+
+
+
+
