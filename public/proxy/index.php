@@ -1,7 +1,13 @@
 <?php
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
-require __DIR__ . '/auth.php';
+// Check if auth file exists, otherwise display error
+if (file_exists(__DIR__ . '/auth.php')) {
+  require __DIR__ . '/auth.php';
+} else {
+  echo 'No authentication.php file found. (/auth.php)';
+  return;
+}
 
 use GuzzleHttp\Client;
 
