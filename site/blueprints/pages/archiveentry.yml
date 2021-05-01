@@ -64,6 +64,19 @@ columns:
               morningshow: Megahex Morgenshow
               misc: Misc
 
+          teasertext:
+            label: Teaser Text
+            type: blocks
+            fieldsets:
+              # - heading
+              - text
+              - list
+              - image
+              # - gallery
+              - video
+              # - code
+              # - markdown
+            help: Appears on home, when linked in curated blogposts/archive-entries. Try to be short
           paragraphs:
               label: Paragraphs
               type: structure
