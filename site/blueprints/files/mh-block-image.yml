@@ -1,0 +1,13 @@
+title: Image
+
+accept:
+  extension: jpg, jpeg, png, webp
+  minheight: 3000
+  # in bytes, about 1 MB, which is too large already!
+  maxsize: 1000000
+
+fields:
+  alt:
+    type: text
+    required: true
+    text: The alt tag is necessary for each image. Blind people e.g. will hear this text instead of seeing the image.

@@ -20,10 +20,12 @@ columns:
             label: Teaser Text
             type: blocks
             fieldsets:
-              # - heading
+              - heading
               - text
               - list
+              # dont use the default image block type!
               - image
+              - mh-image
               # - gallery
               - video
               # - code

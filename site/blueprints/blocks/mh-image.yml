@@ -1,0 +1,29 @@
+name: MHImage
+icon: image
+preview: image
+fields:
+  image:
+    label: field.blocks.image.name
+    type: files
+    multiple: false
+    image:
+      back: black
+    uploads:
+      template: blocks/mh-image
+  alt:
+    label: field.blocks.image.alt
+    type: text
+    icon: title
+  caption:
+    label: field.blocks.image.caption
+    type: writer
+    icon: text
+    inline: true
+  link:
+    label: field.blocks.image.link
+    type: text
+    icon: url
+  # crop:
+  #   label: field.blocks.image.crop
+  #   type: toggle
+  #   width: 1/2
