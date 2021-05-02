@@ -7,7 +7,7 @@ Kirby::plugin('jones-s/mh-image-block', [
         $blocks    = $newPage->teaserText()->toBlocks();
 
         foreach ($blocks as $block) :
-        if ($block->type() !== 'image' || !empty($block->image())) {
+        if ($block->type() !== 'image') {
             $newBlocks->add($block);
         } else {
             $url      = $block->image()->toFile()->url();
@@ -19,7 +19,7 @@ Kirby::plugin('jones-s/mh-image-block', [
                 'image'    => $images,
                 'alt'      => $block->alt()->value(),
                 'caption'  => $block->caption()->value(),
-                'url'  => $url,
+                'url'      => $url,
                 'link'     => $block->link()->value(),
               ],
               'id'   => $block->id(),
