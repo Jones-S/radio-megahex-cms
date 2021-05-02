@@ -14,9 +14,10 @@ Kirby::plugin('jones-s/mh-image-block', [
         // https://getkirby.com/docs/reference/objects/cms/page-blueprint/field
         $fieldDefinition = $newPage->blueprint()->field($fieldKey);
 
-        if (isset($fieldDefinition['type']) && $fieldDefinition['type'] === 'blocks') { // some field definitions dont have a type 🤷‍♂️
+        if (isset($fieldDefinition['type']) && $fieldDefinition['type'] === 'blocks' && $fieldKey === 'teasertext') { // some field definitions dont have a type 🤷‍♂️
 
-          $blocks = $newPage->teaserText()->toBlocks();
+          // $blocks = $newPage->teaserText()->toBlocks();
+          $blocks = $newPage->content()->get($fieldKey)->toBlocks();
 
           foreach ($blocks as $block) {
               if ($block->type() !== 'image') {
