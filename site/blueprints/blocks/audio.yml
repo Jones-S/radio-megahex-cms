@@ -1,0 +1,14 @@
+name: Audio
+icon: file-audio
+tabs:
+  main:
+    label: Main
+    fields:
+      description:
+        type: writer
+        icon: text
+        inline: true
+        placeholder: Description
+        marks:
+          - bold
+          - italic

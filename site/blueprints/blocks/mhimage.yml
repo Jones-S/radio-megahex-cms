@@ -9,7 +9,7 @@ fields:
     image:
       back: black
     uploads:
-      template: blocks/mh-image
+      template: blocks/mhimage
   alt:
     label: field.blocks.image.alt
     type: text

@@ -25,11 +25,12 @@ columns:
               - list
               # dont use the default image block type!
               - image
-              - mh-image
+              - mhimage
               # - gallery
               - video
               # - code
               # - markdown
+              - audio
             help: Appears on home, when linked in curated blogposts/archive-entries. Try to be short
   right:
     width: 1/2

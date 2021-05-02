@@ -35,4 +35,6 @@ kirby/*
 # Kirby CMS + Panel
 # ---------------
 vendor/*
-site/plugins*
+site/plugins/*
+!site/plugins/mh-image-block
+!site/plugins/mh-image-block/*

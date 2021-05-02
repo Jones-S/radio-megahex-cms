@@ -175,36 +175,19 @@ return [
           $twitch = $content->twitch_channel()->toString();
           $relatedPages = $content->related()->toPages();
           $relatedPagesExtended = [];
-          $files = [];
 
           foreach($relatedPages as $relatedPage) {
             $content = $relatedPage->content();
             $image = $relatedPage->images()->first();
-            $images = $relatedPage->images();
 
             if (!empty($image)) {
               $teaserImage = [
                 'filename' => $image->name(),
                 'image' => [
                   'alt' => $image->content()->alt()->toString(),
-                  'thumb' => $image->crop(400, 226, 80)->url(),
+                  'thumb' => $image->crop(400, 400, ['quality' => 70, 'crop' => 'center'])->url(),
                 ]
               ];
-            }
-
-            // as kirby blocks don't return urls of images we need to compare the filename against a list of all files of this entry
-            // at least we can influence the size of the images! (resize and crop)
-            if (!empty($images)) {
-              foreach ($image as $images) {
-                $teaserImages = [
-                  'filename' => $image->name(),
-                  'image' => [
-                    'alt' => $image->content()->alt()->toString(),
-                    'thumb' => $image->crop(400, 226, 80)->url(),
-                    'root' => $image->root(),
-                  ]
-                ];
-              }
             }
 
             // related pages include basic information but we want more than that
@@ -221,7 +204,7 @@ return [
               'teaserImage' => $teaserImage,
               'teaserText' => $relatedPage->teaserText()->toString(), // use convertKirbyTags helper in Frontend to convert from kirby markdown to html
               'file' => $relatedPage->filename()->toString(),
-              'teaserImages' => $teaserImages,
+              'pageType' => $relatedPage->parent()->toString(),
               // 'date' => $date,
               // 'end_time' => $relatedPage->content()->end_time()->toString(),
               // 'format' => $relatedPage->content()->format()->toString(),
