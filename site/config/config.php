@@ -205,10 +205,6 @@ return [
               'teaserText' => $relatedPage->teaserText()->toString(), // use convertKirbyTags helper in Frontend to convert from kirby markdown to html
               'file' => $relatedPage->filename()->toString(),
               'pageType' => $relatedPage->parent()->toString(),
-              // 'date' => $date,
-              // 'end_time' => $relatedPage->content()->end_time()->toString(),
-              // 'format' => $relatedPage->content()->format()->toString(),
-              // 'tags' => $relatedPage->content()->tags()->split(',')
             ];
           }
 
