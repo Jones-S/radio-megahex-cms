@@ -4,6 +4,8 @@ Kirby::plugin('jones-s/mh-image-block', [
   'hooks' => [
     'page.update:after' => function ($newPage, $oldPage) {
 
+      $updatedBlockFields = [];
+
       foreach ($newPage->content()->fields() as $field) {
         // there is no method to get the fields type
         // except by getting the pages blueprint and looking for the fields key
@@ -15,10 +17,6 @@ Kirby::plugin('jones-s/mh-image-block', [
 
         if (isset($fieldDefinition['type']) && $fieldDefinition['type'] === 'blocks') { // some field definitions dont have a type 🤷‍♂️
           $newBlocks = new Kirby\Cms\Blocks();
-          // print('fieldKey: ');
-          // print($fieldKey);
-          // print('.<br>');
-          // $blocks = $newPage->teaserText()->toBlocks();
           $blocks = $newPage->content()->get($fieldKey)->toBlocks();
 
           foreach ($blocks as $block) {
@@ -33,8 +31,7 @@ Kirby::plugin('jones-s/mh-image-block', [
                     'location' => 'kirby',
                     'image'    => $images,
                     'alt'      => $block->alt()->value(),
-                    'caption'  => $url,
-                    // 'caption'  => $block->caption()->value(),
+                    'caption'  => $block->caption()->value(),
                     'url'      => $url,
                     'link'     => $block->link()->value(),
                   ],
@@ -46,12 +43,12 @@ Kirby::plugin('jones-s/mh-image-block', [
               }
           }
 
-          $newPage->update([
-            $fieldKey => $newBlocks->toArray(),
-          ]);
+          $updatedBlockFields[$fieldKey] = $newBlocks->toArray();
         }
-
       }
+
+      // update once!
+      $newPage->update($updatedBlockFields);
     }
   ]
 ]);
