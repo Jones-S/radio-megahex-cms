@@ -5,7 +5,6 @@ Kirby::plugin('jones-s/mh-image-block', [
     'page.update:after' => function ($newPage, $oldPage) {
 
       foreach ($newPage->content()->fields() as $field) {
-        $newBlocks = new Kirby\Cms\Blocks();
         // there is no method to get the fields type
         // except by getting the pages blueprint and looking for the fields key
         // https://forum.getkirby.com/t/how-to-determine-field-type-in-custom-field-method/19254
@@ -14,8 +13,11 @@ Kirby::plugin('jones-s/mh-image-block', [
         // https://getkirby.com/docs/reference/objects/cms/page-blueprint/field
         $fieldDefinition = $newPage->blueprint()->field($fieldKey);
 
-        if (isset($fieldDefinition['type']) && $fieldDefinition['type'] === 'blocks' && $fieldKey === 'teasertext') { // some field definitions dont have a type 🤷‍♂️
-
+        if (isset($fieldDefinition['type']) && $fieldDefinition['type'] === 'blocks') { // some field definitions dont have a type 🤷‍♂️
+          $newBlocks = new Kirby\Cms\Blocks();
+          // print('fieldKey: ');
+          // print($fieldKey);
+          // print('.<br>');
           // $blocks = $newPage->teaserText()->toBlocks();
           $blocks = $newPage->content()->get($fieldKey)->toBlocks();
 
@@ -45,7 +47,7 @@ Kirby::plugin('jones-s/mh-image-block', [
           }
 
           $newPage->update([
-            'teaserText' => $newBlocks->toArray(),
+            $fieldKey => $newBlocks->toArray(),
           ]);
         }
 
