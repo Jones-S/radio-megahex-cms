@@ -36,5 +36,7 @@ kirby/*
 # ---------------
 vendor/*
 site/plugins/*
+
+# this plugin is not installed via composer so we check it in
 !site/plugins/mh-image-block
 !site/plugins/mh-image-block/*
