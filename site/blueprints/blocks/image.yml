@@ -40,7 +40,10 @@ fields:
     icon: url
   url:
     # is filled on page update hook in mh-image-block plugin
-    type: text
+    type: hidden
+  thumb:
+    # is filled on page update hook in mh-image-block plugin
+    type: hidden
   # ratio:
   #   label: field.blocks.image.ratio
   #   type: select

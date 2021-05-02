@@ -20,10 +20,14 @@ Kirby::plugin('jones-s/mh-image-block', [
           $blocks = $newPage->content()->get($fieldKey)->toBlocks();
 
           foreach ($blocks as $block) {
-              if ($block->type() !== 'image') {
+              if (
+                $block->type() !== 'image' ||
+                ($block->type() === 'image' && empty($block->image())) // dont do it for empty image blocks
+              ) {
                   $newBlocks->add($block);
               } else {
                   $url      = $block->image()->toFile()->url();
+                  $thumb    = $block->image()->toFile()->resize(400, 400)->url();
                   $images   = $block->image()->toFiles()->pluck('filename');
                   $newBlock = new \Kirby\Cms\Block(
                       [
@@ -33,6 +37,7 @@ Kirby::plugin('jones-s/mh-image-block', [
                     'alt'      => $block->alt()->value(),
                     'caption'  => $block->caption()->value(),
                     'url'      => $url,
+                    'thumb'      => $thumb,
                     'link'     => $block->link()->value(),
                   ],
                   'id'   => $block->id(),

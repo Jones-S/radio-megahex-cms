@@ -23,9 +23,7 @@ columns:
               - heading
               - text
               - list
-              # dont use the default image block type!
               - image
-              - mhimage
               # - gallery
               - video
               # - code
