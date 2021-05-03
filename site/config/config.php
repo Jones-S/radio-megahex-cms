@@ -1,11 +1,17 @@
 <?php
 
+// require composers autoload to have access to robin scholz betterrest class
+@include_once __DIR__ . '/vendor/autoload.php';
+
+use Robinscholz\Betterrest;
+
 // helper functions
 if (!function_exists('removeEmpty')) {
   function removeEmpty($var) {
     return($var->value !== null && $var->value !== '');
   }
 }
+
 
 /**
  * The config file is optional. It accepts a return array with config options
@@ -176,6 +182,40 @@ return [
           $relatedPages = $content->related()->toPages();
           $relatedPagesExtended = [];
 
+          $rest = new Robinscholz\Betterrest([
+            'srcset' => false,
+            'kirbytags' => false,
+            'smartypants' => true,
+            'language' => 'de',
+            'query' => [
+              'select' => 'files',
+            ],
+          ]);
+
+          // $contento = $rest->contentFromRequest(
+          //   new \Kirby\Http\Request([
+          //     'url' => 'pages/archive'
+          //   ])
+          // );
+
+          $contento = $rest->contentFromRequest(
+            new \Kirby\Http\Request([
+              'url' => 'pages/home'
+            ])
+          );
+
+          $paragraphs = $home->paragraphs()->toArray();
+          $isArray = false;
+          $isArray = print_r($paragraphs, true);
+
+          // if (is_array($paragraphs)) {
+          //   $isArray = true;
+          // }
+
+
+          // $modified = $rest->modifyContent($contento);
+          // $modified = $rest->modifyContent($paragraphs);
+
           foreach($relatedPages as $relatedPage) {
             $content = $relatedPage->content();
             $image = $relatedPage->images()->first();
@@ -205,6 +245,9 @@ return [
               'teaserText' => $relatedPage->teaserText()->toString(), // use convertKirbyTags helper in Frontend to convert from kirby markdown to html
               'file' => $relatedPage->filename()->toString(),
               'pageType' => $relatedPage->parent()->toString(),
+              'rest' => $paragraphs,
+              'isArray' => $isArray,
+              'json' => json_encode($isArray),
             ];
           }
 
@@ -214,7 +257,8 @@ return [
               'content' => [
                 'broadcast' => $broadcast,
                 'twitch_channel' => $twitch,
-                'related' => $relatedPagesExtended
+                'related' => $relatedPagesExtended,
+                'paragraphs' => $home->paragraphs()->toString(),
               ]
             ]
           ];
