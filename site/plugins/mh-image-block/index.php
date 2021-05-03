@@ -27,7 +27,8 @@ Kirby::plugin('jones-s/mh-image-block', [
                   $newBlocks->add($block);
               } else {
                   $url      = $block->image()->toFile()->url();
-                  $thumb    = $block->image()->toFile()->resize(400, 400)->url();
+                  $thumb    = $block->image()->toFile()->crop(400, 400, ['quality' => 60, 'crop' => 'center'])->url();
+                  $medium    = $block->image()->toFile()->resize(800, 800)->url();
                   $images   = $block->image()->toFiles()->pluck('filename');
                   $newBlock = new \Kirby\Cms\Block(
                       [
@@ -38,6 +39,7 @@ Kirby::plugin('jones-s/mh-image-block', [
                     'caption'  => $block->caption()->value(),
                     'url'      => $url,
                     'thumb'      => $thumb,
+                    'medium'      => $medium,
                     'link'     => $block->link()->value(),
                   ],
                   'id'   => $block->id(),

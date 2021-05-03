@@ -20,7 +20,7 @@ columns:
             label: Teaser Text
             type: blocks
             fieldsets:
-              - heading
+              # - heading
               - text
               - list
               - image
