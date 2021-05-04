@@ -175,12 +175,11 @@ return [
           $twitch = $content->twitch_channel()->toString();
           $relatedPages = $content->related()->toPages();
           $relatedPagesExtended = [];
-          $paragraphs = $home->paragraphs()->toArray();
-          $json = [];
+          $paragraphsAsJson = [];
           $structures = $home->paragraphs()->toStructure();
 
           foreach ($structures as $paragraph) {
-            $json[] = [
+            $paragraphsAsJson[] = [
               'title' => $paragraph->title()->toString(),
               'text' => $paragraph->text()->toString(),
               'inverted' => $paragraph->inverted()->toString(),
@@ -223,7 +222,7 @@ return [
             'code' => '200',
             'data' => [
               'content' => [
-                'paragraphs' => $json,
+                'paragraphs' => $paragraphsAsJson,
                 'broadcast' => $broadcast,
                 'twitch_channel' => $twitch,
                 'related' => $relatedPagesExtended,

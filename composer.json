@@ -3,7 +3,7 @@
         "php": ">=7.1.0",
         "getkirby/cms": "^3.0",
         "jenssegers/proxy": "^3.0",
-        "robinscholz/better-rest": "^1.2",
+        "robinscholz/better-rest" : "dev-master#62cee29b107d3e69fb7c733aee577ec39ee5ba7d",
         "sylvainjule/pagetable": "^1.0"
     },
     "config": {
