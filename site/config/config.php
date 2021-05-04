@@ -227,7 +227,8 @@ return [
                 'broadcast' => $broadcast,
                 'twitch_channel' => $twitch,
                 'related' => $relatedPagesExtended,
-              ]
+              ],
+              'id' => 'home'
             ]
           ];
         }
