@@ -1,10 +1,4 @@
 <?php
-
-// require composers autoload to have access to robin scholz betterrest class
-@include_once __DIR__ . '/vendor/autoload.php';
-
-use Robinscholz\Betterrest;
-
 // helper functions
 if (!function_exists('removeEmpty')) {
   function removeEmpty($var) {
@@ -181,40 +175,17 @@ return [
           $twitch = $content->twitch_channel()->toString();
           $relatedPages = $content->related()->toPages();
           $relatedPagesExtended = [];
-
-          $rest = new Robinscholz\Betterrest([
-            'srcset' => false,
-            'kirbytags' => false,
-            'smartypants' => true,
-            'language' => 'de',
-            'query' => [
-              'select' => 'files',
-            ],
-          ]);
-
-          // $contento = $rest->contentFromRequest(
-          //   new \Kirby\Http\Request([
-          //     'url' => 'pages/archive'
-          //   ])
-          // );
-
-          $contento = $rest->contentFromRequest(
-            new \Kirby\Http\Request([
-              'url' => 'pages/home'
-            ])
-          );
-
           $paragraphs = $home->paragraphs()->toArray();
-          $isArray = false;
-          $isArray = print_r($paragraphs, true);
+          $json = [];
+          $structures = $home->paragraphs()->toStructure();
 
-          // if (is_array($paragraphs)) {
-          //   $isArray = true;
-          // }
-
-
-          // $modified = $rest->modifyContent($contento);
-          // $modified = $rest->modifyContent($paragraphs);
+          foreach ($structures as $paragraph) {
+            $json[] = [
+              'title' => $paragraph->title()->toString(),
+              'text' => $paragraph->text()->toString(),
+              'inverted' => $paragraph->inverted()->toString(),
+            ];
+          }
 
           foreach($relatedPages as $relatedPage) {
             $content = $relatedPage->content();
@@ -245,9 +216,6 @@ return [
               'teaserText' => $relatedPage->teaserText()->toString(), // use convertKirbyTags helper in Frontend to convert from kirby markdown to html
               'file' => $relatedPage->filename()->toString(),
               'pageType' => $relatedPage->parent()->toString(),
-              'rest' => $paragraphs,
-              'isArray' => $isArray,
-              'json' => json_encode($isArray),
             ];
           }
 
@@ -255,10 +223,10 @@ return [
             'code' => '200',
             'data' => [
               'content' => [
+                'paragraphs' => $json,
                 'broadcast' => $broadcast,
                 'twitch_channel' => $twitch,
                 'related' => $relatedPagesExtended,
-                'paragraphs' => $home->paragraphs()->toString(),
               ]
             ]
           ];
