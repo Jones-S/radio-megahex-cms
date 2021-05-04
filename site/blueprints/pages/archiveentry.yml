@@ -73,7 +73,7 @@ columns:
               - list
               - image
               # - gallery
-              - video
+              # - video
               # - code
               # - markdown
             help: Appears on home, when linked in curated blogposts/archive-entries. Try to be short

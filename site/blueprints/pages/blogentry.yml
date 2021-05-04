@@ -25,7 +25,7 @@ columns:
               - list
               - image
               # - gallery
-              - video
+              # - video
               # - code
               # - markdown
             help: Appears on home, when linked in curated blogposts/archive-entries. Try to be short
@@ -56,12 +56,12 @@ columns:
             label: Blog Text
             type: blocks
             fieldsets:
-              # - heading
+              - heading
               - text
               - list
               - image
               # - gallery
-              - video
+              # - video
               # - code
               # - markdown
             help: The whole post content. Shows when visiting a blog entry page.
