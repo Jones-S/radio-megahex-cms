@@ -177,6 +177,7 @@ return [
           $relatedPagesExtended = [];
           $paragraphsAsJson = [];
           $structures = $home->paragraphs()->toStructure();
+          $teaserImage = false;
 
           foreach ($structures as $paragraph) {
             $paragraphsAsJson[] = [
