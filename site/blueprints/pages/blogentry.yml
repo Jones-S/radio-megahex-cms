@@ -1,9 +1,8 @@
 title: Blog Entry
 
 columns:
-
-  # main content
-  main:
+  left:
+    width: 1/2
     sections:
       content:
         type: fields
@@ -17,24 +16,55 @@ columns:
             label: Date and start time of show
             type: date
             time: true
-
+          teasertext:
+            label: Teaser Text
+            type: blocks
+            fieldsets:
+              # - heading
+              - text
+              - list
+              - image
+              # - gallery
+              # - video
+              # - code
+              # - markdown
+            help: Appears on home, when linked in curated blogposts/archive-entries. Try to be short
+  right:
+    width: 1/2
+    sections:
+      right-fields:
+        type: fields
+        fields:
           paragraphs:
-              label: Paragraphs
-              type: structure
-              columns:
-                title:
-                  width: 2/8
-                text:
-                  width: 5/8
-                inverted:
-                  width: 1/8
-              fields:
-                title:
-                  type: text
-                text:
-                  type: textarea
-                inverted:
-                  type: toggle
+            label: Paragraphs
+            type: structure
+            columns:
+              title:
+                width: 2/8
+              text:
+                width: 5/8
+              inverted:
+                width: 1/8
+            fields:
+              title:
+                type: text
+              text:
+                type: textarea
+              inverted:
+                type: toggle
+          blogtext:
+            label: Blog Text
+            type: blocks
+            fieldsets:
+              - heading
+              - text
+              - list
+              - image
+              # - gallery
+              # - video
+              # - code
+              # - markdown
+            help: The whole post content. Shows when visiting a blog entry page.
           metadesc:
             label: Meta Description
             type: text

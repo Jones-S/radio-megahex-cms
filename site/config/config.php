@@ -1,11 +1,11 @@
 <?php
-
 // helper functions
 if (!function_exists('removeEmpty')) {
   function removeEmpty($var) {
     return($var->value !== null && $var->value !== '');
   }
 }
+
 
 /**
  * The config file is optional. It accepts a return array with config options
@@ -175,34 +175,34 @@ return [
           $twitch = $content->twitch_channel()->toString();
           $relatedPages = $content->related()->toPages();
           $relatedPagesExtended = [];
+          $paragraphsAsJson = [];
+          $structures = $home->paragraphs()->toStructure();
+
+          foreach ($structures as $paragraph) {
+            $paragraphsAsJson[] = [
+              'title' => $paragraph->title()->toString(),
+              'text' => $paragraph->text()->toString(),
+              'inverted' => $paragraph->inverted()->toString(),
+            ];
+          }
 
           foreach($relatedPages as $relatedPage) {
             $content = $relatedPage->content();
-            // $files = $content->draggable_images()->files();
-            $images = $relatedPage->images();
-            $teaserImages = [];
-            $teaserImage = 'nope';
+            $image = $relatedPage->images()->first();
 
-            if (!empty($images)) {
-              $teaserImage  = $relatedPage->image();
-            }
-
-            foreach ($images as $file) {
-              $teaserImages[] = [
-                'filename' => $file->filename(),
-                'index' => $file->indexOf(),
-                'sizes' => [
-                  'original' => $file->url(),
-                  'alt' => $file->content()->alt()->toString(),
-                  'thumb' => $file->crop(400, 226, 80)->url(),
-                  'small' => $file->resize(720, null, 60)->url(),
-                  'medium' => $file->resize(1440, null, 60)->url(),
-                  'large' => $file->resize(2000, null, 60)->url(), // if the original image is smaller than size, it will just return the biggest possible 👌🏼
-                  'ogimage' => $file->crop(1200, 630, 70)->url(),
+            if (!empty($image)) {
+              $teaserImage = [
+                'filename' => $image->name(),
+                'image' => [
+                  'alt' => $image->content()->alt()->toString(),
+                  'thumb' => $image->crop(400, 400, ['quality' => 70, 'crop' => 'center'])->url(),
                 ]
               ];
             }
 
+            // related pages include basic information but we want more than that
+            // for example we extend that information with the linked podcast file
+            // and a teaser image & text
             $relatedPagesExtended[] = [
               'title' => $relatedPage->title()->toString(),
               'slug' => $relatedPage->uri(),
@@ -212,50 +212,22 @@ return [
               'filename' => $content->filename()->toString(),
               'date' => $content->date()->toDate('Y-m-d\TH:i:s\Z'), // ISO format like: "2020-04-18T20:30:00Z", should be parseable by all browsers
               'teaserImage' => $teaserImage,
-              'teaserImages' => $teaserImages
-              // 'file' => $relatePage->filename()->toString(),
-              // 'date' => $date,
-              // 'end_time' => $relatePage->content()->end_time()->toString(),
-              // 'format' => $relatePage->content()->format()->toString(),
-              // 'tags' => $relatePage->content()->tags()->split(',')
+              'teaserText' => $relatedPage->teaserText()->toString(), // use convertKirbyTags helper in Frontend to convert from kirby markdown to html
+              'file' => $relatedPage->filename()->toString(),
+              'pageType' => $relatedPage->parent()->toString(),
             ];
           }
-          // $entries = [];
-
-          // foreach ($children as $child) {
-          //   if ($child->status() !== 'listed') {
-          //     continue;
-          //   }
-
-          //   $title = $child->title()->toString();
-          //   $uri = $child->uri();
-          //   $content = $child->content();
-          //   $index = $child->indexOf();
-          //   $images = [];
-          //   $date = $child->content()->date()->toDate('Y-m-d\TH:i:s\Z'); // ISO format like: "2020-04-18T20:30:00Z", should be parseable by all browsers
-
-          //   $entries[] = [
-          //     'title' => $title,
-          //     'slug' => $uri,
-          //     'index' => $index,
-          //     'uri' => $child->uri(),
-          //     'slug' => $child->slug(),
-          //     'file' => $child->filename()->toString(),
-          //     'date' => $date,
-          //     'end_time' => $child->content()->end_time()->toString(),
-          //     'format' => $child->content()->format()->toString(),
-          //     'tags' => $child->content()->tags()->split(',')
-          //   ];
-          // }
 
           return [
             'code' => '200',
             'data' => [
               'content' => [
+                'paragraphs' => $paragraphsAsJson,
                 'broadcast' => $broadcast,
                 'twitch_channel' => $twitch,
-                'related' => $relatedPagesExtended
-              ]
+                'related' => $relatedPagesExtended,
+              ],
+              'id' => 'home'
             ]
           ];
         }
