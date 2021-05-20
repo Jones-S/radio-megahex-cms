@@ -68,14 +68,12 @@ return [
                 'sessions' => $storage . '/sessions',
             ]
           ]);
-          $children = $kirby->page('blog')->children();
+          $children = $kirby->page('blog')->children()->listed()->sortBy(function ($child) {
+            return $child->date()->toDate();
+          }, 'desc');
           $entries = [];
 
           foreach ($children as $child) {
-            if ($child->status() !== 'listed') {
-              continue;
-            }
-
             $title = $child->title()->toString();
             $uri = $child->uri();
             $content = $child->content();
@@ -91,6 +89,7 @@ return [
               'slug' => $child->slug(),
               'file' => $child->filename()->toString(),
               'date' => $date,
+              'teaserText' => $child->teaserText()->toString(), // use convertKirbyTags helper in Frontend to convert from kirby markdown to html
             ];
           }
 
@@ -177,7 +176,6 @@ return [
           $relatedPagesExtended = [];
           $paragraphsAsJson = [];
           $structures = $home->paragraphs()->toStructure();
-          $teaserImage = false;
 
           foreach ($structures as $paragraph) {
             $paragraphsAsJson[] = [
@@ -188,8 +186,9 @@ return [
           }
 
           foreach($relatedPages as $relatedPage) {
+            $teaserImage = false;
             $content = $relatedPage->content();
-            $image = $relatedPage->images()->first();
+            $image = $relatedPage->draggable_images()->first()->toFile();
 
             if (!empty($image)) {
               $teaserImage = [

@@ -13,7 +13,7 @@ columns:
             text: |
               Blog entries show up automatically on _Blog_. To feature speficic blog entries on _Home_, go to _Home_ and select the blog entries to be displayed.
           date:
-            label: Date and start time of show
+            label: Date of blog post
             type: date
             time: true
           teasertext:
